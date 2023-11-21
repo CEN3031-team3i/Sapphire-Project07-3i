@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState, useReducer } from 'react';
 import { Link } from 'react-router-dom';
 import '../../ActivityLevels.less';
-import { compileArduinoCode } from '../../Utils/helpers';
+import { compileArduinoCode, handleSave} from '../../Utils/helpers';
 import { message, Spin, Row, Col, Alert, Menu, Dropdown } from 'antd';
 import CodeModal from '../modals/CodeModal';
 import ConsoleModal from '../modals/ConsoleModal';
@@ -32,6 +32,11 @@ export default function PublicCanvas({ activity, isSandbox }) {
   const workspaceRef = useRef(null);
   const activityRef = useRef(null);
 
+  //variables to track auto Save status and times
+  const [autoSaveStatus, setAutoSaveStatus] = useState('');
+  const [lastAutoSaveTime, setLastAutoSaveTime] = useState(null);
+
+
   const setWorkspace = () => {
     workspaceRef.current = window.Blockly.inject('blockly-canvas', {
       toolbox: document.getElementById('toolbox'),
@@ -48,6 +53,54 @@ export default function PublicCanvas({ activity, isSandbox }) {
     };
     setUp();
   }, [activity]);
+
+  //Auto Save feature
+  useEffect(() => {
+    // auto-save logic
+    const autoSaveInterval = setInterval(async () => {
+      if (workspaceRef.current && activityRef.current) {
+        setAutoSaveStatus('Auto-saving...');
+        const res = await handleSave(
+          activityRef.current.id,
+          workspaceRef,
+          replayRef.current
+        );
+        if (res.data) {
+          setLastAutoSaveTime(getFormattedDate(res.data[0].updated_at));
+          setAutoSaveStatus('Auto-save completed');
+        } else {
+          setAutoSaveStatus('Auto-save failed');
+          console.log(res.err);
+        }
+      }
+    }, 5000); // Auto-save every 60 seconds
+
+    return () => {
+      clearInterval(autoSaveInterval);
+    };
+  }, []);
+
+  const handleManualSave = async () => {
+    // save workspace then update load save options
+    pushEvent('save');
+    const res = await handleSave(activity.id, workspaceRef, replayRef.current);
+    if (res.err) {
+      message.error(res.err);
+    } else {
+      setLastAutoSaveTime(getFormattedDate(res.data[0].updated_at));
+      setAutoSaveStatus('Manual save completed');
+      message.success('Workspace saved successfully.');
+    }
+
+    const savesRes = await getSaves(activity.id);
+    if (savesRes.data) setSaves(savesRes.data);
+
+    // Reset auto-save status after manual save
+    setTimeout(() => {
+      setAutoSaveStatus('');
+    }, 3000); // Display status for 3 seconds
+  };
+
 
   const handleUndo = () => {
     if (workspaceRef.current.undoStack_.length > 0)
@@ -264,6 +317,17 @@ export default function PublicCanvas({ activity, isSandbox }) {
                       <Dropdown overlay={menu}>
                         <i className='fas fa-ellipsis-v'></i>
                       </Dropdown>
+                      <button
+                        onClick={handleManualSave}
+                        className='flex flex-column'
+                      >
+                      </button>
+                    </div>
+                    <div>
+                      {autoSaveStatus}
+                    </div>
+                    <div>
+                      {lastAutoSaveTime ? `Last auto-save ${lastAutoSaveTime}` : ''}
                     </div>
                   </Col>
                 </Row>
