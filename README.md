@@ -140,3 +140,22 @@ Before submitting a pull request, rebase the feature branch into the target bran
 
 - PRs to **master** should squash and merge
 - PRs to all other branches should create a merge commit
+
+## Project Features Implemented
+
+Version History Modal:
+- Description: Implemented a version history modal to track and display changes made by team members.
+- Screenshots: [Link to Screenshots]
+  
+Rename Save Feature:
+- Description: Added a feature allowing users to rename specific saves for improved project organization.
+- Screenshots: [Link to Screenshots]
+
+UI Matching:
+Description: Ensured consistency in the user interface to align with CASMM's design standards.
+Screenshots: [Link to Screenshots]
+
+Save Pop-up for Non-Logged-in Users:
+Description: Added a pop-up for non-logged-in users, prompting them to log in before saving their work.
+Screenshots: [Link to Screenshots]
+
