@@ -145,17 +145,56 @@ Before submitting a pull request, rebase the feature branch into the target bran
 
 Version History Modal:
 - Description: Implemented a version history modal to track and display changes made by team members.
-- Screenshots: [Link to Screenshots]
+- Screenshots:
+  
+<img width="688" alt="Screenshot 2023-12-10 at 3 54 33 PM" src="https://github.com/camcimber/Nutritional-Facts/assets/89543442/02cb9b21-c402-4895-8d60-6c7a0dd76ad5">
   
 Rename Save Feature:
 - Description: Added a feature allowing users to rename specific saves for improved project organization.
-- Screenshots: [Link to Screenshots]
-
-UI Matching:
-Description: Ensured consistency in the user interface to align with CASMM's design standards.
-Screenshots: [Link to Screenshots]
+- Screenshots:
+  
+<img width="552" alt="Screenshot 2023-12-10 at 4 02 23 PM" src="https://github.com/camcimber/Nutritional-Facts/assets/89543442/d7cf3d3f-378a-4a0d-a97b-ff4494f27224">
 
 Save Pop-up for Non-Logged-in Users:
 Description: Added a pop-up for non-logged-in users, prompting them to log in before saving their work.
-Screenshots: [Link to Screenshots]
+Screenshots: 
+
+<img width="520" alt="Screenshot 2023-12-10 at 3 54 19 PM" src="https://github.com/camcimber/Nutritional-Facts/assets/89543442/1c73b6bf-e2e4-4a41-95ed-a70dca71e8c2">
+
+## Outstanding Work
+
+User Stories
+
+1. As a new user, I want to access a gallery of other users' work so that I can get inspiration for what I want to create and learn from others. [1]
+Completed:
+- As a new user, I want to be able to code in the workspace and have my progress be saved, even without creating an account. Once I close out of the tab and come back, I want my work to still be there, as long as I have cookies allowed on my browser. [1]
+
+Outstanding:
+- As a new user, I want to access a gallery of other users' work so that I can get inspiration for what I want to create and learn from others. [1]
+
+- As a member of a team, I want access to a gallery shared by the members where each person's changes get saved in a different gallery entry, so everyone has access to their contributions. [8]
+
+- As a student, I want to be able to access the gallery with code examples from the home screen, make a copy for myself, to aid in my learning Ardublocky. [2]
+
+
+2. As a member of a large team, I want to be able to view my teammates' changes and be able to restore previous history so that I can achieve full awareness of what's going on and fix possible mistakes. [8]
+Completed:
+-As a member of a large team, I want to be able to view my teammates' changes and be able to restore previous history so that I can achieve full awareness of what's going on and fix possible mistakes. [8]
+
+-As a student, I want to be able to see a history of my saves and be able to revert my project to one of them if needed, so I can easily undo any work that I’ve done. [8]
+
+- Link to our project board: https://github.com/orgs/CEN3031-team3i/projects/1/views/1
+
+## Built Upon
+The project is built upon the following technologies and frameworks:
+
+- React for front-end development
+- JavaScript, CSS, HTML for UI updates
+- Docker for efficient containerization
+
+## Credits
+We would like to credit the following people/organizations for their contributions:
+
+- Bootstrap: Used for styling and layout components.
+- YouTube Tutorial on Modals in ReactJS: Referenced for implementing the version history modal.
 
